@@ -174,15 +174,15 @@
 }
 
 .task-planned {
-    background-color: blue;
+    background-color: rgb(14, 174, 254);
 }
 
 .task-running {
-    background-color: rgb(15, 188, 2);
+    background-color:blue;
 }
 
 .task-finished {
-    background-color: rgb(98, 98, 98);
+    background-color: rgba(98, 98, 98, 0.704);
     text-decoration: line-through;
     text-decoration-color: white;
 }
