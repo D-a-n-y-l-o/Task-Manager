@@ -59,9 +59,10 @@ export class Auth {
         this.avatar.classList.add('header_logo-text');
 
         this.logoutBtn.addEventListener('click', () => {
+            taskBoard.logout();
             this.logout();
             api.logout();
-            taskBoard.logout();
+            
         })
     }
 

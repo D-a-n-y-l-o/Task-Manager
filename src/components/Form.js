@@ -41,7 +41,14 @@ export class Form {
             try{
                 await onSubmit(this.formValues, event);
             }catch (err) {
-                console.log(err);
+                console.log(err.data);
+                err.data.details.forEach(({path, message}) => {
+                    const erroredInput = this.inputs.find((input) => {
+                        return input.name === path[0];
+                    });
+                    console.log(erroredInput)
+                    erroredInput.updateErrorMassage(message);
+                });
             }
 
 

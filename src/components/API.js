@@ -1,5 +1,14 @@
 const TOKEN_KEY = 'token';
 
+class APIError extends Error {
+    constructor({message, data, status}) {
+        super(message);
+        this.data = data;
+        this.status = status;
+    }
+}
+
+
 class API {
     constructor() {
         this.baseUrl = 'https://byte-tasks.herokuapp.com'
@@ -9,9 +18,14 @@ class API {
         };
     }
 
-    handleErrors({ok, url, status}) {
+    async handleErrors(response) {
+        const {ok, status, statusText} = response
         if(!ok){
-            throw new Error(`Response on ${url} failed with status ${status}`)
+            throw new APIError({
+                message: 'Error',
+                data: await response.json(),
+                status: status
+            })
         }
     }
 
@@ -22,7 +36,7 @@ class API {
             body: JSON.stringify(data)
         });
 
-        this.handleErrors(response);
+        await this.handleErrors(response);
 
         const {token} = await response.json();
 
@@ -38,7 +52,7 @@ class API {
             body: JSON.stringify(data)
         });
 
-        this.handleErrors(response);
+        await this.handleErrors(response);
 
         const registeredUser = await response.json();
 
@@ -51,7 +65,7 @@ class API {
             headers: this.headers,
         });
 
-        this.handleErrors(response);
+        await this.handleErrors(response);
 
         const user = await response.json();
 
@@ -76,7 +90,7 @@ class API {
             body: JSON.stringify(data)
         });
 
-        this.handleErrors(response);
+        await this.handleErrors(response);
 
         return response.json();
     }
@@ -87,7 +101,7 @@ class API {
             headers: this.headers,
         });
 
-        this.handleErrors(response);
+        await this.handleErrors(response);
 
         return await response.json();
     }
@@ -99,7 +113,7 @@ class API {
             body: JSON.stringify(data)
         });
 
-        this.handleErrors(response);
+        await this.handleErrors(response);
 
         return response.json();
     }
@@ -110,7 +124,7 @@ class API {
             headers: this.headers
         });
 
-        this.handleErrors(response);
+        await this.handleErrors(response);
 
         return response;
     }

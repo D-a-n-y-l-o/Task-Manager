@@ -41,6 +41,7 @@ export class Input {
 
         this.input.addEventListener('input', (event) => {
             this.value = event.target.value;
+            this.updateErrorMassage('')
             if(onInput) {
                 onInput(event);
             }
@@ -58,5 +59,9 @@ export class Input {
 
     render(container) {
         container.append(this.control);
+    }
+
+    updateErrorMassage (message) {
+        this.errorMessageElement.innerText = message;
     }
 }
