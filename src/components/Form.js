@@ -38,7 +38,12 @@ export class Form {
 
             this.submitBtn.setAttribute('disabled', '');
 
-            await onSubmit(this.formValues, event);
+            try{
+                await onSubmit(this.formValues, event);
+            }catch (err) {
+                console.log(err);
+            }
+
 
             this.submitBtn.removeAttribute('disabled');
         });

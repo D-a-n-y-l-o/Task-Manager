@@ -68,6 +68,10 @@ class API {
 
         return this.getSelf();
     }
+
+    logout() {
+        localStorage.removeItem(TOKEN_KEY);
+    }
 };
 
 
