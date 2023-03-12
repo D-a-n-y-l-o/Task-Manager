@@ -4,7 +4,7 @@ import {Input} from './components/Input';
 import {Form} from './components/Form';
 import { api } from './components/API';
 import { Auth } from './components/Auth';
-
+import { TaskBoard } from './components/TaskBoard';
 
 const appContainer = document.getElementById('app');
 
@@ -20,9 +20,17 @@ const auth = new Auth({
     onLoginSuccess,
 });
 
-const renderAppLayout = (user) => {
+export const taskBoard = new TaskBoard({
+    appContainer 
+});
+
+const renderAppLayout = async (user) => {
     auth.user = user;
     auth.renderHeaderNav();
+    taskBoard.renderLayout();
+
+    const taskList = await api.getAllTasks();
+    taskList.forEach((task) => taskBoard.addTask(task))
 }
 
 const init = async () => {

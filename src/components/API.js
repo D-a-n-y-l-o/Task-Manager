@@ -69,6 +69,52 @@ class API {
         return this.getSelf();
     }
 
+    async createTask(data) {
+        const response = await fetch(`${this.baseUrl}/api/task`, {
+            method: 'POST',
+            headers: this.headers,
+            body: JSON.stringify(data)
+        });
+
+        this.handleErrors(response);
+
+        return response.json();
+    }
+
+    async getAllTasks () {
+        const response = await fetch(`${this.baseUrl}/api/task`, {
+            method: 'GET',
+            headers: this.headers,
+        });
+
+        this.handleErrors(response);
+
+        return await response.json();
+    }
+
+    async editTask (id, data) {
+        const response = await fetch(`${this.baseUrl}/api/task/${id}`, {
+            method: 'PATCH',
+            headers: this.headers,
+            body: JSON.stringify(data)
+        });
+
+        this.handleErrors(response);
+
+        return response.json();
+    }
+
+    async deleteTask (id) {
+        const response = await fetch(`${this.baseUrl}/api/task/${id}`, {
+            method: 'DELETE',
+            headers: this.headers
+        });
+
+        this.handleErrors(response);
+
+        return response;
+    }
+
     logout() {
         localStorage.removeItem(TOKEN_KEY);
     }

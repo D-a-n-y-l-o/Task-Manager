@@ -2,6 +2,7 @@ import { Input } from './Input';
 import { Form } from './Form';
 import { api } from './API';
 import { loginConfig, registerConfig } from './formConfigs';
+import { taskBoard } from '../index'
 
 const getLoginForm = (onSuccess) => {
     return new Form({
@@ -60,6 +61,7 @@ export class Auth {
         this.logoutBtn.addEventListener('click', () => {
             this.logout();
             api.logout();
+            taskBoard.logout();
         })
     }
 

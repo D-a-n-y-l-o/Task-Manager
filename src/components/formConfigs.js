@@ -28,3 +28,16 @@ export const registerConfig = [
         type: 'password'
     }
 ];
+
+export const taskConfig = [
+    {
+        name: 'name',
+        label: 'Name',
+        type: 'text'
+    },
+    {
+        name: 'description',
+        label: 'Description',
+        type: 'text'
+    }
+];
