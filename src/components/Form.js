@@ -41,10 +41,11 @@ export class Form {
             try{
                 await onSubmit(this.formValues, event);
             }catch (err) {
-                console.log(err.data);
-                err.data.details.forEach(({path, message}) => {
+                console.log(Object.entries(err.data));
+                Object.entries(err.data).forEach(([path, message]) => {
+                    console.log(path, message)
                     const erroredInput = this.inputs.find((input) => {
-                        return input.name === path[0];
+                        return input.name === path;
                     });
                     console.log(erroredInput)
                     erroredInput.updateErrorMassage(message);
